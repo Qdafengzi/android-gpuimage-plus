@@ -69,7 +69,7 @@ android {
             }
 
             ndk {
-                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'
+                abiFilters 'arm64-v8a'
                 // if (!usingCMakeCompileDebug()) {
                 //     debugSymbolLevel ''
                 // }
@@ -107,6 +107,9 @@ android {
     }
 
     namespace = 'org.wysaid.library'
+    buildFeatures{
+        buildConfig true
+    }
 }
 
 dependencies {
