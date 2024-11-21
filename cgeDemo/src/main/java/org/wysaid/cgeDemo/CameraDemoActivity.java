@@ -121,6 +121,7 @@ public class CameraDemoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_camera_demo);
         PermissionUtil.verifyStoragePermissions(this);
 
@@ -129,7 +130,15 @@ public class CameraDemoActivity extends AppCompatActivity {
         Button takeShotBtn = (Button) findViewById(R.id.takeShotBtn);
         Button recordBtn = (Button) findViewById(R.id.recordBtn);
         mCameraView = (CameraRecordGLSurfaceView) findViewById(R.id.myGLSurfaceView);
-        mCameraView.presetCameraForward(false);
+        mCameraView.presetCameraForward(true);
+        mCameraView.presetRecordingSize(2160,2160);
+        mCameraView.setPictureSize(2160,2160,false);
+        mCameraView.setFitFullView(true);
+        mCameraView.setFilterTouchesWhenObscured(true);
+        mCameraView.setFilterWithConfig("@beautify bilateral 10.362694 3.5 2 @adjust sharpen 9.533679 1 @adjust shadowhighlight -2.590668 0 @adjust shadowhighlight 0 179.792725 @adjust level 0 1 1.000000 @vignette 0.300000 0.300000 @adjust colorbalance 0 0 0.192746 @adjust colorbalance 0 0.242487 0 @adjust brightness 0.500000 @adjust contrast 1.000000 @adjust saturation 2.000000 @adjust exposure 0.623558 \"+@Curve RGB(0,255)(255,0) @Style cm mapping0.jpg 80 80 8 3 ");
+
+
+//        mCameraView.
         SeekBar seekBar = (SeekBar) findViewById(R.id.globalRestoreSeekBar);
 
         takePicBtn.setOnClickListener(new View.OnClickListener() {

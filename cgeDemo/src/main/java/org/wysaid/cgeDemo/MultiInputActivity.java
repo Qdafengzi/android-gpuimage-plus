@@ -24,8 +24,10 @@ public class MultiInputActivity extends AppCompatActivity {
         mCameraView = (MultiInputDemo) findViewById(R.id.myGLSurfaceView);
         mCameraView.presetCameraForward(false);
 
+
         //Recording video size
-        mCameraView.presetRecordingSize(720, 1280);
+        mCameraView.presetRecordingSize(2160, 2160);
+        mCameraView.setFocusable(true);
 
         mCameraView.setZOrderOnTop(false);
         mCameraView.setZOrderMediaOverlay(true);
