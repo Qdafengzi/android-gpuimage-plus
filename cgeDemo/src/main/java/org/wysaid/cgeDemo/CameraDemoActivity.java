@@ -24,6 +24,7 @@ import org.wysaid.myUtils.FileUtil;
 import org.wysaid.myUtils.ImageUtil;
 import org.wysaid.myUtils.MsgUtil;
 import org.wysaid.myUtils.PermissionUtil;
+import org.wysaid.nativePort.CGEImageHandler;
 import org.wysaid.nativePort.CGENativeLibrary;
 import org.wysaid.view.CameraRecordGLSurfaceView;
 
@@ -131,11 +132,31 @@ public class CameraDemoActivity extends AppCompatActivity {
         Button recordBtn = (Button) findViewById(R.id.recordBtn);
         mCameraView = (CameraRecordGLSurfaceView) findViewById(R.id.myGLSurfaceView);
         mCameraView.presetCameraForward(true);
-        mCameraView.presetRecordingSize(2160,2160);
-        mCameraView.setPictureSize(2160,2160,false);
+        mCameraView.presetRecordingSize(2160, 2160);
+        mCameraView.setPictureSize(2160, 2160, false);
         mCameraView.setFitFullView(true);
         mCameraView.setFilterTouchesWhenObscured(true);
-        mCameraView.setFilterWithConfig("@beautify bilateral 10.362694 3.5 2 @adjust sharpen 9.533679 1 @adjust shadowhighlight -2.590668 0 @adjust shadowhighlight 0 179.792725 @adjust level 0 1 1.000000 @vignette 0.300000 0.300000 @adjust colorbalance 0 0 0.192746 @adjust colorbalance 0 0.242487 0 @adjust brightness 0.500000 @adjust contrast 1.000000 @adjust saturation 2.000000 @adjust exposure 0.623558 \"+@Curve RGB(0,255)(255,0) @Style cm mapping0.jpg 80 80 8 3 ");
+//        mCameraView.setFilterWithConfig("@adjust exposure 5 ");
+
+
+        SeekBar seekBar1 = findViewById(R.id.seekBar);
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mCameraView.setFilterWithConfig("@adjust whitebalance " + progress/100f + " 1");
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
 //        mCameraView.
@@ -247,7 +268,7 @@ public class CameraDemoActivity extends AppCompatActivity {
 
         //Recording video size
         // mCameraView.presetRecordingSize(480, 640);
-       mCameraView.presetRecordingSize(1080, 1920);
+        mCameraView.presetRecordingSize(1080, 1920);
 
         //Taking picture size.
         mCameraView.setPictureSize(2048, 2048, true); // > 4MP
@@ -327,6 +348,8 @@ public class CameraDemoActivity extends AppCompatActivity {
         public void onClick(View v) {
             MyButtons btn = (MyButtons) v;
             mCameraView.setFilterWithConfig(btn.filterConfig);
+
+
             mCurrentConfig = btn.filterConfig;
         }
     };

@@ -14,6 +14,7 @@ import org.wysaid.camera.CameraInstance;
 import org.wysaid.cgeDemo.demoUtils.MultiInputDemo;
 import org.wysaid.common.Common;
 import org.wysaid.myUtils.ImageUtil;
+import org.wysaid.nativePort.CGEImageHandler;
 import org.wysaid.view.CameraRecordGLSurfaceView;
 
 import java.util.logging.Logger;
@@ -30,13 +31,19 @@ public class MultiInputActivity extends AppCompatActivity {
 
         mCameraView = (MultiInputDemo) findViewById(R.id.myGLSurfaceView);
         mCameraView.presetCameraForward(false);
-
+        mCameraView.cameraInstance().setPreferPreviewSize(1920,1920);
 
 
         //Recording video size
         mCameraView.presetRecordingSize(2160, 2160);
         mCameraView.setFocusable(true);
         mCameraView.presetCameraForward(true);
+//        CGEImageHandler cgeImageHandler = new CGEImageHandler();
+//        cgeImageHandler.initWithSize(1920,1920);
+//        cgeImageHandler.setFilterWithConfig("@adjust sharpen 10 1.5");
+
+//        mCameraView.setFilterWithConfig("@adjust sharpen 10 1.5");
+        mCameraView.setFilterWithConfig("@selfblend whitebalance 0.8 3");
 
         mCameraView.setZOrderOnTop(false);
         mCameraView.setZOrderMediaOverlay(true);
