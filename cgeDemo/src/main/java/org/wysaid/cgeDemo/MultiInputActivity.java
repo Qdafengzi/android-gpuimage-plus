@@ -1,5 +1,8 @@
 package org.wysaid.cgeDemo;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -10,6 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.wysaid.camera.CameraInstance;
 import org.wysaid.cgeDemo.demoUtils.MultiInputDemo;
 import org.wysaid.common.Common;
+import org.wysaid.myUtils.ImageUtil;
+import org.wysaid.view.CameraRecordGLSurfaceView;
+
+import java.util.logging.Logger;
 
 public class MultiInputActivity extends AppCompatActivity {
 
@@ -25,9 +32,11 @@ public class MultiInputActivity extends AppCompatActivity {
         mCameraView.presetCameraForward(false);
 
 
+
         //Recording video size
         mCameraView.presetRecordingSize(2160, 2160);
         mCameraView.setFocusable(true);
+        mCameraView.presetCameraForward(true);
 
         mCameraView.setZOrderOnTop(false);
         mCameraView.setZOrderMediaOverlay(true);
@@ -71,5 +80,22 @@ public class MultiInputActivity extends AppCompatActivity {
 
     public void demoClicked(View view) {
         mCameraView.triggerEffect();
+    }
+
+    public void takePhoto(View view) {
+        mCameraView.takePicture(new CameraRecordGLSurfaceView.TakePictureCallback() {
+            @Override
+            public void takePictureOK(Bitmap bmp) {
+                if (bmp != null) {
+                    String s = ImageUtil.saveBitmap(bmp);
+                    Log.d("图片", "大小:" + bmp.getWidth() + "*" + bmp.getHeight());
+
+                    bmp.recycle();
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + s)));
+                } else {
+
+                }
+            }
+        }, null, null, 1.0f, true);
     }
 }

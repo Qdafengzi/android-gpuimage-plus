@@ -184,16 +184,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static final DemoClassDescription mDemos[] = new DemoClassDescription[]{
-            new DemoClassDescription("BasicImageDemoActivity", "Basic Image Filter Demo"),
-            new DemoClassDescription("ImageDemoActivity", "Advanced Image Filter Demo"),
-            new DemoClassDescription("ImageDeformActivity", "Image Deform Demo"),
             new DemoClassDescription("CameraDemoActivity", "Camera Filter Demo"),
             new DemoClassDescription("MultiInputActivity", "Multi Input Demo"),
-            new DemoClassDescription("SimplePlayerDemoActivity", "Simple Player Demo"),
-            new DemoClassDescription("VideoPlayerDemoActivity", "Video Player Demo"),
-            new DemoClassDescription("FaceTrackingDemoActivity", "Face Tracking Demo"),
-            new DemoClassDescription("ImageDemoWithMatrixActivity", "Image Demo WithMatrix"),
-            new DemoClassDescription("TestCaseActivity", "Test Cases")
+//            new DemoClassDescription("BasicImageDemoActivity", "Basic Image Filter Demo"),
+//            new DemoClassDescription("ImageDemoActivity", "Advanced Image Filter Demo"),
+//            new DemoClassDescription("ImageDeformActivity", "Image Deform Demo"),
+//            new DemoClassDescription("SimplePlayerDemoActivity", "Simple Player Demo"),
+//            new DemoClassDescription("VideoPlayerDemoActivity", "Video Player Demo"),
+//            new DemoClassDescription("FaceTrackingDemoActivity", "Face Tracking Demo"),
+//            new DemoClassDescription("ImageDemoWithMatrixActivity", "Image Demo WithMatrix"),
+//            new DemoClassDescription("TestCaseActivity", "Test Cases")
     };
 
     public class DemoButton extends androidx.appcompat.widget.AppCompatButton implements View.OnClickListener {

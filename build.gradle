@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '2.0.20'
+        kotlin_version = '1.9.21'
     }
     repositories {
         mavenCentral()
@@ -26,10 +26,10 @@ allprojects {
 
 ext {
     android = [
-            compileSdkVersion: 30,
-            buildToolsVersion: '30.0.3',
-            minSdkVersion    : 16,
-            targetSdkVersion : 25, // higher target version needs more storage permission request.
+//            compileSdkVersion: 34,
+//            buildToolsVersion: '30.0.3',
+//            minSdkVersion    : 16,
+//            targetSdkVersion : 25, // higher target version needs more storage permission request.
             versionCode      : 2,
             versionName      : "3.0.0",
             applicationId    : "org.wysaid.cgeDemo",

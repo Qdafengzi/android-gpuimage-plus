@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 def usingCMakeCompile() {
     /// define  gradle.ext.usingCMakeCompile = false to disable CMakeCompile Mode.
@@ -19,16 +20,14 @@ def deployArtifacts() {
 }
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
-
+    compileSdk 35
     if (usingCMakeCompile()) {
         ndkVersion rootProject.ext.android.ndkVersion
     }
 
     defaultConfig {
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdkVersion 24
+        targetSdkVersion 35
 
         buildConfigField("boolean", "CGE_USE_VIDEO_MODULE", disableVideoModule() ? "false" : "true")
 
@@ -102,12 +101,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
     }
 
     namespace = 'org.wysaid.library'
-    buildFeatures{
+    buildFeatures {
         buildConfig true
     }
 }
@@ -117,90 +120,90 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:' + rootProject.ext.android.appcompatX
 }
 
-if (deployArtifacts()) {
-    apply plugin: 'maven-publish'
-
-    def siteUrl = 'https://github.com/wysaid/android-gpuimage-plus'
-    def gitUrl = 'https://github.com/wysaid/android-gpuimage-plus.git'
-    group = "org.wysaid"
-
-    if (disableVideoModule()) {
-        version = rootProject.ext.android.versionName + '-min'
-    } else {
-        version = rootProject.ext.android.versionName
-    }
-
-    publishing {
-        publications {
-            release(MavenPublication) {
-                artifactId = 'gpuimage-plus'
-                groupId = 'org.wysaid'
-                version = version
-
-                afterEvaluate {
-                    from components.release
-//                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-                }
-
-                pom {
-                    name = 'gpuimage-plus'
-                    description = 'A C++ & Java library for Image/Camera/Video filters.'
-                    url = siteUrl
-
-                    developers {
-                        developer {
-                            id = 'wysaid'
-                            name = 'Wang Yang'
-                            email = 'wysaid@gmail.com'
-                        }
-                    }
-
-                    scm {
-                        connection = gitUrl
-                        developerConnection = gitUrl
-                        url = siteUrl
-                    }
-
-                    licenses {
-                        license {
-                            name = 'The MIT License'
-                            url = 'https://github.com/wysaid/android-gpuimage-plus/blob/master/LICENSE'
-                        }
-                    }
-                }
-            }
-        }
-        repositories {
-            maven {
-                name = "local_repo"
-                url = gradle.ext.localRepoDir
-//            credentials {
-//                username = gradle.ext.repoUsername
-//                password = gradle.ext.repoPassword
+//if (deployArtifacts()) {
+//    apply plugin: 'maven-publish'
+//
+//    def siteUrl = 'https://github.com/wysaid/android-gpuimage-plus'
+//    def gitUrl = 'https://github.com/wysaid/android-gpuimage-plus.git'
+//    group = "org.wysaid"
+//
+//    if (disableVideoModule()) {
+//        version = rootProject.ext.android.versionName + '-min'
+//    } else {
+//        version = rootProject.ext.android.versionName
+//    }
+//
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                artifactId = 'gpuimage-plus'
+//                groupId = 'org.wysaid'
+//                version = version
+//
+//                afterEvaluate {
+//                    from components.release
+////                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+//                }
+//
+//                pom {
+//                    name = 'gpuimage-plus'
+//                    description = 'A C++ & Java library for Image/Camera/Video filters.'
+//                    url = siteUrl
+//
+//                    developers {
+//                        developer {
+//                            id = 'wysaid'
+//                            name = 'Wang Yang'
+//                            email = 'wysaid@gmail.com'
+//                        }
+//                    }
+//
+//                    scm {
+//                        connection = gitUrl
+//                        developerConnection = gitUrl
+//                        url = siteUrl
+//                    }
+//
+//                    licenses {
+//                        license {
+//                            name = 'The MIT License'
+//                            url = 'https://github.com/wysaid/android-gpuimage-plus/blob/master/LICENSE'
+//                        }
+//                    }
+//                }
 //            }
-            }
-        }
-    }
+//        }
+//        repositories {
+//            maven {
+//                name = "local_repo"
+//                url = gradle.ext.localRepoDir
+////            credentials {
+////                username = gradle.ext.repoUsername
+////                password = gradle.ext.repoPassword
+////            }
+//            }
+//        }
+//    }
+//
+//    task sourcesJar(type: Jar) {
+//        from android.sourceSets.main.java.srcDirs
+//        classifier = 'sources'
+//    }
+//
+//    task javadoc(type: Javadoc) {
+//        source = android.sourceSets.main.java.srcDirs
+//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    }
+//
+//    task javadocJar(type: Jar, dependsOn: javadoc) {
+//        classifier = 'javadoc'
+//        from javadoc.destinationDir
+//    }
+//
+//    artifacts {
+//        archives javadocJar
+//        archives sourcesJar
+//    }
 
-    task sourcesJar(type: Jar) {
-        from android.sourceSets.main.java.srcDirs
-        classifier = 'sources'
-    }
-
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    artifacts {
-        archives javadocJar
-        archives sourcesJar
-    }
-
-}
+//}
 

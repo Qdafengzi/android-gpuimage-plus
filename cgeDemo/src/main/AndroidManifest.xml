@@ -11,11 +11,11 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <permission
-        android:name="android.permission.FLASHLIGHT"
-        android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
-        android:protectionLevel="normal"
-        tools:ignore="ReservedSystemPermission" />
+<!--    <permission-->
+<!--        android:name="android.permission.FLASHLIGHT"-->
+<!--        android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"-->
+<!--        android:protectionLevel="normal"-->
+<!--        tools:ignore="ReservedSystemPermission" />-->
 
     <application
         android:allowBackup="true"
@@ -26,6 +26,7 @@
         <activity android:name=".MultiInputActivity"></activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
