@@ -149,7 +149,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    String lastVideoFileName = FileUtil.getTextContent(CameraDemoActivity.lastVideoPathFileName);
+                    String lastVideoFileName = FileUtil.getTextContent("");
                     if (lastVideoFileName == null) {
                         MsgUtil.toastMsg(VideoPlayerDemoActivity.this, "No video is recorded, please record one in the 2nd case.");
                         return;
@@ -187,10 +187,10 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i != MainActivity.EFFECT_CONFIGS.length; ++i) {
-            CameraDemoActivity.MyButtons button = new CameraDemoActivity.MyButtons(this, MainActivity.EFFECT_CONFIGS[i]);
-            button.setText("filter" + i);
-            button.setOnClickListener(mFilterSwitchListener);
-            menuLayout.addView(button);
+//            CameraDemoActivity.MyButtons button = new CameraDemoActivity.MyButtons(this, MainActivity.EFFECT_CONFIGS[i]);
+//            button.setText("filter" + i);
+//            button.setOnClickListener(mFilterSwitchListener);
+//            menuLayout.addView(button);
         }
 
         mGalleryBtn = (Button) findViewById(R.id.galleryBtn);
@@ -249,9 +249,9 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
     private View.OnClickListener mFilterSwitchListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            CameraDemoActivity.MyButtons btn = (CameraDemoActivity.MyButtons) v;
-            mPlayerView.setFilterWithConfig(btn.filterConfig);
-            mCurrentConfig = btn.filterConfig;
+//            CameraDemoActivity.MyButtons btn = (CameraDemoActivity.MyButtons) v;
+//            mPlayerView.setFilterWithConfig(btn.filterConfig);
+//            mCurrentConfig = btn.filterConfig;
         }
     };
 

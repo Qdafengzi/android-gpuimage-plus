@@ -75,7 +75,7 @@ public class TestCaseActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, "Test case 1 clicked!\n");
 
                 String outputFilename = FileUtil.getPath() + "/blendVideo.mp4";
-                String inputFileName = FileUtil.getTextContent(CameraDemoActivity.lastVideoPathFileName);
+                String inputFileName = FileUtil.getTextContent("");
                 if (inputFileName == null) {
                     showMsg("No video is recorded, please record one in the 2nd case.");
                     return;

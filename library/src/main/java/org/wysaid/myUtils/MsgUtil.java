@@ -31,7 +31,7 @@ public class MsgUtil {
     }
 
     public static void toastMsg(Context context, String msg) {
-        toastMsg(context, msg, Toast.LENGTH_LONG);
+        toastMsg(context, msg, Toast.LENGTH_SHORT);
     }
 
     public static void toastMsg(Context context, String msg, int duration) {

@@ -42,8 +42,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     protected int mViewWidth;
     protected int mViewHeight;
 
-    protected int mRecordWidth = 480;
-    protected int mRecordHeight = 640;
+    protected int mRecordWidth = 1080;
+    protected int mRecordHeight = 1080;
 
     //isBigger 为true 表示当宽高不满足时，取最近的较大值.
     // 若为 false 则取较小的
@@ -91,8 +91,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         return true;
     }
 
-    protected int mMaxPreviewWidth = 1920;
-    protected int mMaxPreviewHeight = 1920;
+    protected int mMaxPreviewWidth = 3840;
+    protected int mMaxPreviewHeight = 2160;
 
     public static class Viewport {
          public int x, y, width, height;
@@ -105,7 +105,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     }
 
     //The max preview size. Make it greater if you want to preview with 2K/4K or more!
-    void setMaxPreviewSize(int w, int h) {
+    public void setMaxPreviewSize(int w, int h) {
         mMaxPreviewWidth = w;
         mMaxPreviewHeight = h;
     }
@@ -222,7 +222,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         GLES20.glDisable(GLES20.GL_STENCIL_TEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-        int texSize[] = new int[1];
+        int[] texSize = new int[1];
 
         GLES20.glGetIntegerv(GLES20.GL_MAX_TEXTURE_SIZE, texSize, 0);
         mMaxTextureSize = texSize[0];
@@ -296,6 +296,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     }
 
     protected void calcViewport() {
+        Log.i(LOG_TAG, "尺寸mRecord ：" + mRecordWidth + " " + mRecordHeight);
+        Log.i(LOG_TAG, "尺寸view ：" + mViewWidth + " " + mViewHeight);
 
         float scaling = mRecordWidth / (float) mRecordHeight;
         float viewRatio = mViewWidth / (float) mViewHeight;
@@ -329,4 +331,5 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         mDrawViewport.y = (mViewHeight - mDrawViewport.height) / 2;
         Log.i(LOG_TAG, String.format("View port: %d, %d, %d, %d", mDrawViewport.x, mDrawViewport.y, mDrawViewport.width, mDrawViewport.height));
     }
+
 }

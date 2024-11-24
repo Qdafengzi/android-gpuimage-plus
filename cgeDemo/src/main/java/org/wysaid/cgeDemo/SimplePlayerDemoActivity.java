@@ -173,7 +173,7 @@ public class SimplePlayerDemoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    String lastVideoFileName = FileUtil.getTextContent(CameraDemoActivity.lastVideoPathFileName);
+                    String lastVideoFileName = FileUtil.getTextContent("");
                     if (lastVideoFileName == null) {
                         MsgUtil.toastMsg(SimplePlayerDemoActivity.this, "No video is recorded, please record one in the 2nd case.");
                         return;

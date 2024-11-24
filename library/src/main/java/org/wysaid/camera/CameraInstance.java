@@ -40,11 +40,11 @@ public class CameraInstance {
     private int mPreviewWidth;
     private int mPreviewHeight;
 
-    private int mPictureWidth = 1000;
-    private int mPictureHeight = 1000;
+    private int mPictureWidth = 1080;
+    private int mPictureHeight = 1080;
 
-    private int mPreferPreviewWidth = 640;
-    private int mPreferPreviewHeight = 640;
+    private int mPreferPreviewWidth = 1080;
+    private int mPreferPreviewHeight = 1080;
 
     private int mFacing = 0;
 
@@ -203,6 +203,7 @@ public class CameraInstance {
     public synchronized void setParams(Camera.Parameters param) {
         if(mCameraDevice != null) {
             mParams = param;
+            mParams.set("shutter-sound", 0); // 不保证有效
             mCameraDevice.setParameters(mParams);
         }
         assert mCameraDevice != null : ASSERT_MSG;
